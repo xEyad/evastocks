@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "171244151688",
+    "project_id": "evastoks",
+    "storage_bucket": "evastoks.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:171244151688:android:7f14c87faca2054581903d",
+        "android_client_info": {
+          "package_name": "com.takamul.nosooh"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "171244151688-l07jltjj40rj20h8v04efjcp1e5m19g4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC8JT42kVPliyT0mjavuvIVVvHQFnkgVHs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "171244151688-l07jltjj40rj20h8v04efjcp1e5m19g4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
