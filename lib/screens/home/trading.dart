@@ -46,7 +46,7 @@ class _TradingScreenState extends State<TradingScreen> {
   TradingModel? model;
   MarketsModel? markets;
   AnalystsModel? analystsListModel;
-  String? selectedFilter = '1';
+  String? selectedFilter = '3';
   bool showSearchBar = false;
   int cursor = 1;
   int? marketType;
