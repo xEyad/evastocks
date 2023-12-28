@@ -12,10 +12,12 @@ import 'package:nosooh/services/api_service.dart';
 import 'package:nosooh/services/navigation_service.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import 'package:the_apple_sign_in/the_apple_sign_in.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 
 class AuthProvider extends APIService {
   String? countryCode;
   String? phoneNumber;
+  final FirebaseAuth auth = FirebaseAuth.instance;
 
   Future<Map> login() async {
     const String loginApi = 'login';
@@ -25,6 +27,33 @@ class AuthProvider extends APIService {
             url: webBaseUrl + loginApi,
             body: {'countryCode': countryCode, 'phoneNumber': phoneNumber},
             hasToken: false)
+        .then((value) async {
+      if (value.statusCode! >= 200 &&
+          value.statusCode! <= 299 &&
+          value.data['success'].toString() == 'true') {
+        return {
+          'status': true,
+          'data': value.data['data'],
+        };
+      } else {
+        return {
+          'status': false,
+          'data': value.data['data'],
+        };
+      }
+    }).catchError((error) {
+      return {
+        'status': false,
+      };
+    });
+    return res;
+  }
+
+  Future<Map> loginGoogle(String email,String accessToken) async {
+    const String loginApi = 'google/callback';
+String? fcmToken = await FirebaseMessaging.instance.getToken();
+    final res = await getRequest(
+            url: webBaseUrl + loginApi,queryParameters: {'code':accessToken,"device_token":fcmToken??""})
         .then((value) async {
       if (value.statusCode! >= 200 &&
           value.statusCode! <= 299 &&
@@ -124,6 +153,18 @@ class AuthProvider extends APIService {
         final String userPhotoURL =
             user.photoURL ?? ""; // You can check if photoURL is null
         print('Profile Picture URL: $userPhotoURL');
+
+        return await loginGoogle(userEmail,accessToken);
+        // await Provider.of<AuthProvider>(context, listen: false)
+        //       .updateJWTToken(jwtToken: value['data']['data']['token'])
+        //       .then((_) {
+        //     Navigator.of(context).pushAndRemoveUntil(
+        //       MaterialPageRoute(
+        //         builder: (context) => Tabs(),
+        //       ),
+        //       (route) => false,
+        //     );
+        //   });
       }
     } catch (error) {
       print(error);
@@ -148,7 +189,6 @@ class AuthProvider extends APIService {
      */
   }
 
-  final FirebaseAuth auth = FirebaseAuth.instance;
 
    signInWithApple({List<Scope> scopes = const []}) async {
    /* final result = await TheAppleSignIn.performRequests(

@@ -212,8 +212,18 @@ class _Login2State extends State<Login2> {
                   if(Platform.isAndroid)
                   InkWell(
                     onTap: () async {
-                      await Provider.of<AuthProvider>(context, listen: false)
+                      final value = await Provider.of<AuthProvider>(context, listen: false)
                           .signInWithGoogle();
+                          if (value['status'] == true) {
+                            Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => const VerifyOTP(),
+                            ));
+                          } else {
+                            showMessage(
+                                ctx: context,
+                                message: AppLocalizations.of(context)!.tryAgainLater,
+                                title: AppLocalizations.of(context)!.wrong);
+                          }
                     },
                     child: Container(
                       height: 60,
