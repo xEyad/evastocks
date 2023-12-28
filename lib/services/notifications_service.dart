@@ -95,8 +95,8 @@ class PushNotificationService with ChangeNotifier {
           padding: EdgeInsets.all(20),          
           child:Column(
             children: [
-              Text(message.notification?.title??"",style: TextStyle(color: Colors.white,fontSize: 20)),
-              Text(message.notification?.body??"",style: TextStyle(color: Colors.white,fontSize: 40)),
+              Text(message.notification?.title??"",style: TextStyle(color: Colors.white,fontSize: 20),textAlign: TextAlign.center,),
+              Text(message.notification?.body??"",style: TextStyle(color: Colors.white,fontSize: 40),textAlign: TextAlign.center,),
             ],
           )), // put your widget to be shown here
         context: NavigationService.context!,

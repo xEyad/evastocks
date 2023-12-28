@@ -13,19 +13,28 @@ import 'package:nosooh/services/navigation_service.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import 'package:the_apple_sign_in/the_apple_sign_in.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'dart:io' show Platform;
 
 class AuthProvider extends APIService {
   String? countryCode;
   String? phoneNumber;
   final FirebaseAuth auth = FirebaseAuth.instance;
-
+    String get deviceType {
+    if (Platform.isAndroid) {
+      return "2";
+    } else if (Platform.isIOS) {
+      return "1";
+    }
+    return "0";
+  }
   Future<Map> login() async {
     const String loginApi = 'login';
-
+    
+    String? fcmToken = await FirebaseMessaging.instance.getToken();
     final res = await postRequest(
             invalidTokenRedirection: false,
             url: webBaseUrl + loginApi,
-            body: {'countryCode': countryCode, 'phoneNumber': phoneNumber},
+            body: {'countryCode': countryCode, 'phoneNumber': phoneNumber,"device_token":fcmToken,"device_type":deviceType},
             hasToken: false)
         .then((value) async {
       if (value.statusCode! >= 200 &&
@@ -51,9 +60,9 @@ class AuthProvider extends APIService {
 
   Future<Map> loginGoogle(String email,String accessToken) async {
     const String loginApi = 'google/callback';
-String? fcmToken = await FirebaseMessaging.instance.getToken();
+      String? fcmToken = await FirebaseMessaging.instance.getToken();
     final res = await getRequest(
-            url: webBaseUrl + loginApi,queryParameters: {'code':accessToken,"device_token":fcmToken??""})
+            url: webBaseUrl + loginApi,queryParameters: {'code':accessToken,"device_token":fcmToken??"","device_type":deviceType})
         .then((value) async {
       if (value.statusCode! >= 200 &&
           value.statusCode! <= 299 &&
@@ -81,11 +90,12 @@ String? fcmToken = await FirebaseMessaging.instance.getToken();
     required String password,
   }) async {
     const String loginApi = 'login';
+      String? fcmToken = await FirebaseMessaging.instance.getToken();
 
     final res = await postRequest(
             invalidTokenRedirection: false,
             url: webBaseUrl + loginApi,
-            body: {'email': email, 'password': password},
+            body: {'email': email, 'password': password,"device_token":fcmToken??"","device_type":deviceType},
             hasToken: false)
         .then((value) async {
           print(value.data);
@@ -270,6 +280,7 @@ String? fcmToken = await FirebaseMessaging.instance.getToken();
     required String password,
   }) async {
     const String loginApi = 'register';
+    String? fcmToken = await FirebaseMessaging.instance.getToken();
 
     final res = await postRequest(
             invalidTokenRedirection: false,
@@ -281,6 +292,8 @@ String? fcmToken = await FirebaseMessaging.instance.getToken();
               'name': name,
               'phone': phoneNumber,
               'password': password,
+              "device_token":fcmToken??"",
+              "device_type":deviceType
             },
             hasToken: false)
         .then((value) async {
