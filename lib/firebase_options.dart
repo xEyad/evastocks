@@ -62,7 +62,7 @@ class DefaultFirebaseOptions {
     storageBucket: 'eva-app-6c969.appspot.com',
     androidClientId: '1049091943287-h9sg7s55e35b9kod97th6nfubdlckf58.apps.googleusercontent.com',
     iosClientId: '1049091943287-ft4ab95lud35c26e98bbq0kv1c5jbukh.apps.googleusercontent.com',
-    iosBundleId: 'com.takamul.nosooh',
+    iosBundleId: 'app.Eva.missaan',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
@@ -73,6 +73,6 @@ class DefaultFirebaseOptions {
     storageBucket: 'eva-app-6c969.appspot.com',
     androidClientId: '1049091943287-h9sg7s55e35b9kod97th6nfubdlckf58.apps.googleusercontent.com',
     iosClientId: '1049091943287-86sf6av8cht5mqafimk18n8lnm2l3eli.apps.googleusercontent.com',
-    iosBundleId: 'com.takamul.nosooh.RunnerTests',
+    iosBundleId: 'app.Eva.missaan.RunnerTests',
   );
 }

@@ -7,12 +7,57 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:171244151688:android:7f14c87faca2054581903d",
+        "mobilesdk_app_id": "1:171244151688:android:c619be848f4adc8081903d",
         "android_client_info": {
-          "package_name": "com.takamul.nosooh"
+          "package_name": "app.Eva.missaan"
         }
       },
       "oauth_client": [
+        {
+          "client_id": "171244151688-l07jltjj40rj20h8v04efjcp1e5m19g4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC8JT42kVPliyT0mjavuvIVVvHQFnkgVHs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "171244151688-l07jltjj40rj20h8v04efjcp1e5m19g4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:171244151688:android:7f14c87faca2054581903d",
+        "android_client_info": {
+          "package_name": "app.Eva.missaan"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "171244151688-09n7m7epg7dglmnfon4jg0a3j05i5df4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "app.Eva.missaan",
+            "certificate_hash": "9aaf7c62f0cb92160ac3d0f89dd7736f6569066a"
+          }
+        },
+        {
+          "client_id": "171244151688-mv270pu5npvid1kjntp0q18d93u269fj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "app.Eva.missaan",
+            "certificate_hash": "61350d850a95033b0fdecd32acd47a2e13df061d"
+          }
+        },
         {
           "client_id": "171244151688-l07jltjj40rj20h8v04efjcp1e5m19g4.apps.googleusercontent.com",
           "client_type": 3
