@@ -40,9 +40,11 @@ import 'package:provider/provider.dart';
 class PushNotificationService with ChangeNotifier {
   initPushNotification() async {
     await requestNotificationsPermission();
-    initOnBackgroundMessageListener();
-    initOnMessageListener();
-    initFirebaseOnMessageOpenedAppListener();
+    _initOnBackgroundMessageListener();
+    _initOnMessageListener();
+    _initFirebaseOnMessageOpenedAppListener();
+    String? token = await FirebaseMessaging.instance.getToken();
+    print("FCM TOKEN $token");
   }
 
   setUpInteractedMessage() async {
@@ -77,7 +79,7 @@ class PushNotificationService with ChangeNotifier {
     );
   }
 
-  initOnMessageListener() {
+  _initOnMessageListener() {
     FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
       print('Got a message whilst in the foreground!');
       print('Message data: ${message.data}');
@@ -87,7 +89,16 @@ class PushNotificationService with ChangeNotifier {
 
       InAppNotification.show(
         duration: Duration(seconds: 5),
-        child: Container(), // put your widget to be shown here
+        child: Container(
+          width: 200,
+          decoration: BoxDecoration(color: Colors.blue,),
+          padding: EdgeInsets.all(20),          
+          child:Column(
+            children: [
+              Text(message.notification?.title??"",style: TextStyle(color: Colors.white,fontSize: 20)),
+              Text(message.notification?.body??"",style: TextStyle(color: Colors.white,fontSize: 40)),
+            ],
+          )), // put your widget to be shown here
         context: NavigationService.context!,
         onTap: () {
           _handleMessage(message);
@@ -96,7 +107,7 @@ class PushNotificationService with ChangeNotifier {
     });
   }
 
-  initFirebaseOnMessageOpenedAppListener() {
+  _initFirebaseOnMessageOpenedAppListener() {
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
       if (message.notification != null) {
         print('Message also contained a notification: ${message.notification}');
@@ -105,7 +116,7 @@ class PushNotificationService with ChangeNotifier {
     });
   }
 
-  initOnBackgroundMessageListener() {
+  _initOnBackgroundMessageListener() {
     FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
   }
 
