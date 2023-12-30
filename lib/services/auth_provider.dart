@@ -85,6 +85,33 @@ class AuthProvider extends APIService {
     return res;
   }
 
+  Future<Map> loginApple(String name,String email,String accessToken) async {
+    const String loginApi = 'get-apple-details';
+      String? fcmToken = await FirebaseMessaging.instance.getToken();
+    final res = await postRequest(
+            url: webBaseUrl + loginApi,body: {"Name":name,"Email":email,'token':accessToken,"device_token":fcmToken??"","device_type":deviceType})
+        .then((value) async {
+      if (value.statusCode! >= 200 &&
+          value.statusCode! <= 299 &&
+          value.data['success'].toString() == 'true') {
+        return {
+          'status': true,
+          'data': value.data['data'],
+        };
+      } else {
+        return {
+          'status': false,
+          'data': value.data['data'],
+        };
+      }
+    }).catchError((error) {
+      return {
+        'status': false,
+      };
+    });
+    return res;
+  }
+
   Future<Map> login2({
     required String email,
     required String password,
@@ -240,6 +267,8 @@ class AuthProvider extends APIService {
         AppleIDAuthorizationScopes.fullName,
       ],
     );
+    print("Apple login Successfull, user ${credential.givenName} with email ${credential.email}");
+    return await loginApple(credential.givenName??"",credential.email!,credential.identityToken!);
   }
 
   Future<Map> forgetPassword({
