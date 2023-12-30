@@ -301,7 +301,10 @@
   "youAreNotSaudi": "انت غير موجود بالسعودية؟",
   "dividend": "التوزيعات",
   "wrongCode": "كود خاطئ",
-  "entitlementToDividends": "استحقاق التوزيعات النقدية"
+  "entitlementToDividends": "استحقاق التوزيعات النقدية",
+  "sendTestNotification": "إرسال إشعار تجريبي",
+  "cancel": "إلغاء",
+  "couldNotSendNotification": "فشل أثناء إشعار تجريبي"
 
 
 }

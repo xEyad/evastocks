@@ -101,6 +101,7 @@ class ServiceProvider extends APIService {
         notifyListeners();
       }
     }).catchError((error) {
+      throw error;
       print('get rating analysts list data error ${error.toString()}');
       notifyListeners();
     });
@@ -1917,6 +1918,17 @@ class ServiceProvider extends APIService {
       updatedInformation = false;
 
       print('update profile data  error $error');
+    });
+  }
+
+  Future<bool> sendTestNotifications()async{
+    return await postRequest(url: 'https://evastocks.com/api/send-test-notification',body: {}).then((value) {
+      print(value.data);
+      if(value.data['code'].toString() == '1'){
+        return false;
+      }else{
+        return true;
+      }
     });
   }
 }

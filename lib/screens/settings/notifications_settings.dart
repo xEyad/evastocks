@@ -4,8 +4,11 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:lottie/lottie.dart';
 import 'package:nosooh/components/custom_button.dart';
 import 'package:nosooh/components/custom_text_button.dart';
+import 'package:nosooh/services/service_provider.dart';
 import 'package:nosooh/utils/colors.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:nosooh/utils/functions.dart';
+import 'package:provider/provider.dart';
 import 'package:video_player/video_player.dart';
 
 class NotificationsSettings extends StatefulWidget {
@@ -87,19 +90,25 @@ class _NotificationsSettingsState extends State<NotificationsSettings> {
                   context: context, builder: (context) => AlertDialog(
                   shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(20))),
-                  title:const Center(child: Text('إرسال إشعار تجريبي',style: TextStyle(color: kMainColor,fontSize: 19,fontWeight: FontWeight.w700),)),
+                  title: Center(child: Text(AppLocalizations.of(context)!.sendTestNotification,style: const TextStyle(color: kMainColor,fontSize: 19,fontWeight: FontWeight.w700),)),
                  content: IntrinsicHeight(
                    child: Column(
                      children: [
                        Center(child: Text(textAlign: TextAlign.center,AppLocalizations.of(context)!.willSendNotification,style: const TextStyle(color: kSecondColor,fontSize: 16,fontWeight: FontWeight.w500),)),
                        const SizedBox(height: 30),
-                       CustomButton(title: AppLocalizations.of(context)!.send, onPressed: () {
-
+                       CustomButton(title: AppLocalizations.of(context)!.send, onPressed: ()async {
+                            await Provider.of<ServiceProvider>(context,listen: false).sendTestNotifications().then((value) {
+                              if(value){
+                                Navigator.of(context).pop();
+                              }else{
+                                showMessage(ctx: context, message: AppLocalizations.of(context)!.couldNotSendNotification, title: AppLocalizations.of(context)!.failed);
+                              }
+                            });
                        },),
                        const SizedBox(height: 5,),
 
-                       CustomTextButton(title: 'إلغاء', onPressed: () {
-
+                       CustomTextButton(title: '${AppLocalizations.of(context)!.cancel}', onPressed: () {
+          Navigator.of(context).pop();
                        },)
                      ],
                    ),

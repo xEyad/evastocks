@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -329,6 +331,7 @@ class _RegisterState extends State<Register> {
                   const SizedBox(
                     height: 20,
                   ),
+                  if(Platform.isAndroid)
                   InkWell(
                     onTap: () async {
                       await Provider.of<AuthProvider>(context, listen: false)
@@ -361,6 +364,7 @@ class _RegisterState extends State<Register> {
                   const SizedBox(
                     height: 20,
                   ),
+                  if(Platform.isIOS)
                   InkWell(
                     onTap: () async {
                       await Provider.of<AuthProvider>(context, listen: false)

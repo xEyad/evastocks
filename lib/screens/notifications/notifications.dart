@@ -62,52 +62,59 @@ class _NotificationsState extends State<Notifications> {
           future: _getNotifications,
           builder: (context, snapshot) {
             if (snapshot.hasData) {
-              NotificationData? notificationsModel =
-                  NotificationData.fromJson(snapshot.data?['data']);
-
-              print(notificationsModel.read.length);
-
-              return SingleChildScrollView(
-                child: Column(
-                  children: [
+              if(snapshot.data!['data'] != null){
+                NotificationData? notificationsModel =
+                NotificationData.fromJson(snapshot.data?['data']);
+                print(notificationsModel.read.length);
+                return SingleChildScrollView(
+                  child: Column(
+                    children: [
 
                       const NotificationDayContainer(
-                      day: 'جديد',
-                    ),
-                    if(notificationsModel.unread.isEmpty)
-                      Padding(
-                        padding: const EdgeInsets.only(top: 20),
-                        child: Text('لا يوجد اشعارات جديدة'),
+                        day: 'جديد',
                       ),
-                    ListView.builder(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemBuilder: (context, index) {
-                        return NotificationTileContainer(
-                            notification: notificationsModel.unread[index]);
-                      },
-                      itemCount: notificationsModel.unread.length,
-                    ),
-                    const NotificationDayContainer(
-                      day: 'الأقدم',
-                    ),
-                    if(notificationsModel.read.isEmpty)
-                      Padding(
-                        padding: const EdgeInsets.only(top: 20),
-                        child: Text('لا يوجد اشعارات جديدة'),
+                      if(notificationsModel.unread.isEmpty)
+                        const Padding(
+                          padding: EdgeInsets.only(top: 20),
+                          child: Text('لا يوجد اشعارات جديدة'),
+                        ),
+                      ListView.builder(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemBuilder: (context, index) {
+                          return NotificationTileContainer(
+                              notification: notificationsModel.unread[index]);
+                        },
+                        itemCount: notificationsModel.unread.length,
                       ),
-                    ListView.builder(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemBuilder: (context, index) {
-                        return NotificationTileContainer(
-                            notification: notificationsModel.read[index]);
-                      },
-                      itemCount: notificationsModel.read.length,
-                    ),
-                  ],
-                ),
-              );
+                      const NotificationDayContainer(
+                        day: 'الأقدم',
+                      ),
+                      if(notificationsModel.read.isEmpty)
+                        const Padding(
+                          padding: EdgeInsets.only(top: 20),
+                          child: Text('لا يوجد اشعارات جديدة'),
+                        ),
+                      ListView.builder(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemBuilder: (context, index) {
+                          return NotificationTileContainer(
+                              notification: notificationsModel.read[index]);
+                        },
+                        itemCount: notificationsModel.read.length,
+                      ),
+                    ],
+                  ),
+                );
+              }else{
+                return    const Center(
+                  child: Padding(
+                    padding: EdgeInsets.only(top: 20),
+                    child: Text('لا يوجد اشعارات جديدة'),
+                  ),
+                );
+              }
             }
             return const SizedBox();
           },

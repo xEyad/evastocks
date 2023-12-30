@@ -15,7 +15,7 @@ class RatingAnalystsListModel {
       code: json['code'] ?? "",
       msg: json['msg'] ?? '',
       data: (json['data'] as List).map((i) => DataItem.fromJson(i)).toList(),
-      meta: Meta.fromJson(json['meta']),
+      meta: Meta.fromJson(json['meta']??{}),
     );
   }
 }
@@ -130,7 +130,7 @@ class Meta {
       isMine: json['is_mine'],
       marketId: json['market_id'],
       analystName: json['analyst_name'] ?? "",
-      cashPercentage: json['cash_percentage'].toDouble(),
+      cashPercentage: json['cash_percentage']?.toDouble() ??0,
       type: json['type'] ?? '',
       bio: json['bio'] ?? "",
       currency: json['currency'] ?? "",

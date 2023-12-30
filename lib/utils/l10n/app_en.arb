@@ -296,6 +296,8 @@
   "youAreNotSaudi": "You're not Saudi?",
   "dividend": "DIVIDEND",
   "wrongCode": "Wrong Code",
-  "entitlementToDividends": "Entitlement to dividends"
-
+  "entitlementToDividends": "Entitlement to dividends",
+  "sendTestNotification": "Send Test Notification",
+  "cancel": "Cancel",
+  "couldNotSendNotification": "Could not Send Test Notification"
 }
