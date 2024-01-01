@@ -66,7 +66,7 @@ class AuthProvider extends APIService {
         .then((value) async {
       if (value.statusCode! >= 200 &&
           value.statusCode! <= 299 &&
-          value.data['success'].toString() == 'true') {
+          value.data['code'].toString() == '0') {
         return {
           'status': true,
           'data': value.data['data'],

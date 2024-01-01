@@ -215,9 +215,16 @@ class _Login2State extends State<Login2> {
                       final value = await Provider.of<AuthProvider>(context, listen: false)
                           .signInWithGoogle();
                           if (value['status'] == true) {
-                            Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => const VerifyOTP(),
-                            ));
+                           await Provider.of<AuthProvider>(context, listen: false)
+                              .updateJWTToken(jwtToken: value['data']['token'])
+                              .then((_) {
+                            Navigator.of(context).pushAndRemoveUntil(
+                              MaterialPageRoute(
+                                builder: (context) => Tabs(),
+                              ),
+                              (route) => false,
+                            );
+                          });
                           } else {
                             showMessage(
                                 ctx: context,
