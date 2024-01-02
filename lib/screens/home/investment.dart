@@ -45,7 +45,7 @@ class _InvestmentScreenState extends State<InvestmentScreen> {
   List recommendations = [];
   TradingModel? model;
   AnalystsModel? analystsListModel;
-  String? selectedFilter = '1';
+  String? selectedFilter = '3';
   bool showSearchBar = false;
 
   int cursor = 1;
