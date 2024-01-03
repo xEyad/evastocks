@@ -226,8 +226,7 @@ class AuthProvider extends APIService {
      */
   }
 
-
-   signInWithApple({List<Scope> scopes = const []}) async {
+  signInWithApple({List<Scope> scopes = const []}) async {
    /* final result = await TheAppleSignIn.performRequests(
         [AppleIdRequest(requestedScopes: scopes)]);
     switch (result.status) {
