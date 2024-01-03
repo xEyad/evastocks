@@ -484,7 +484,7 @@ class _UpdateProfileState extends State<UpdateProfile> {
                         Navigator.of(context).pop();
                         showMessage(ctx: context, message: AppLocalizations.of(context)!.profileUpdated, title: AppLocalizations.of(context)!.success,backgroundColor: Colors.green);
                       }else{
-                        showMessage(ctx: context, message: AppLocalizations.of(context)!.tryAgainLater, title: AppLocalizations.of(context)!.wrong);
+                        showMessage(ctx: context, message: value["msg"], title: AppLocalizations.of(context)!.wrong);
                       }
                       setState(() {
                         _isLoading = false;
