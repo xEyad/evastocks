@@ -267,8 +267,8 @@ class AuthProvider extends APIService {
         AppleIDAuthorizationScopes.fullName,
       ],
     );
-    print("Apple login Successfull, user ${credential.givenName} with email ${credential.email}");
-    return await loginApple(credential.givenName??"",credential.email!,credential.identityToken!);
+    print("Apple login Successfull, user ${credential?.givenName} with email ${credential?.email}. user token ${credential?.identityToken}");
+    return await loginApple(credential.givenName??"",credential.email??"",credential.identityToken!);
   }
 
   Future<Map> forgetPassword({

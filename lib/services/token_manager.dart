@@ -1,4 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart'; 
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 mixin TokenManager {
   final secureStorage = const FlutterSecureStorage(
@@ -22,5 +24,11 @@ mixin TokenManager {
 
   logout() async {
     await secureStorage.deleteAll();
+    try{
+      await GoogleSignIn().disconnect();
+    }catch(e){}
+    try{
+      await FirebaseAuth.instance.signOut();
+    }catch(e){}
   }
 }

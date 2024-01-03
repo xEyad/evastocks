@@ -39,6 +39,7 @@ class _Login2State extends State<Login2> {
       e164Key: '966-SA-0');
   final TextEditingController _phoneController = TextEditingController();
   bool _isLoading = false;
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -262,8 +263,25 @@ class _Login2State extends State<Login2> {
                   if(Platform.isIOS)
                   InkWell(
                     onTap: () async {
-                      await Provider.of<AuthProvider>(context, listen: false)
+                      final value = await Provider.of<AuthProvider>(context, listen: false)
                           .signInWithApple();
+                          if (value['status'] == true) {
+                           await Provider.of<AuthProvider>(context, listen: false)
+                              .updateJWTToken(jwtToken: value['data']['token'])
+                              .then((_) {
+                            Navigator.of(context).pushAndRemoveUntil(
+                              MaterialPageRoute(
+                                builder: (context) => Tabs(),
+                              ),
+                              (route) => false,
+                            );
+                          });
+                          } else {
+                            showMessage(
+                                ctx: context,
+                                message: AppLocalizations.of(context)!.tryAgainLater,
+                                title: AppLocalizations.of(context)!.wrong);
+                          }
                     },
                     child: Container(
                       height: 60,
