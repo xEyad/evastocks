@@ -1863,7 +1863,7 @@ class ServiceProvider extends APIService {
   }
 
   bool updatedInformation = false;
-  Future<void> updateProfileData({
+  Future<dynamic> updateProfileData({
     required String fullName,
     String countryCode = '+966',
     required String personalNumber,
@@ -1882,7 +1882,10 @@ class ServiceProvider extends APIService {
     if (kDebugMode) {
       print('update profile data endpoint $endPoint');
     }
-    final res = await postRequestFormData(
+    try{
+
+    
+    final value = await postRequestFormData(
       url: endPoint,
       hasToken: true,
       body: {
@@ -1900,8 +1903,8 @@ class ServiceProvider extends APIService {
         if(image != null && image.isNotEmpty)
           'userImage' : await MultipartFile.fromFile(image)
       },
-    ).then((value) async {
-      print('update profile response ${value.data}');
+    );
+     print('update profile response ${value.data}');
 
       if (value.statusCode! >= 200 &&
           value.statusCode! <= 299 &&
@@ -1911,14 +1914,15 @@ class ServiceProvider extends APIService {
         print('update profile data successfully');
       } else {
         updatedInformation = false;
-
         print('update profile data  error');
+        return value.data;
       }
-    }).catchError((error) {
+    }catch(error)
+    {
       updatedInformation = false;
-
       print('update profile data  error $error');
-    });
+    }
+      
   }
 
   Future<bool> sendTestNotifications()async{

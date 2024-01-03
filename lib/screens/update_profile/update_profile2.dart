@@ -947,8 +947,7 @@ class _UpdateProfile2State extends State<UpdateProfile2> {
                               } else {
                                 showMessage(
                                     ctx: context,
-                                    message: AppLocalizations.of(context)!
-                                        .tryAgainLater,
+                                    message: value['msg'],
                                     title: AppLocalizations.of(context)!.wrong);
                               }
                               setState(() {
