@@ -210,7 +210,6 @@ class _Login2State extends State<Login2> {
                   const SizedBox(
                     height: 20,
                   ),
-                  if(Platform.isAndroid)
                   InkWell(
                     onTap: () async {
                       final value = await Provider.of<AuthProvider>(context, listen: false)

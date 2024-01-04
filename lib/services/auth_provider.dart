@@ -150,21 +150,22 @@ class AuthProvider extends APIService {
   }
 
   signInWithGoogle() async {
-    final GoogleSignInAccount? googleSignInAccount =
-        await GoogleSignIn().signIn();
-    if (googleSignInAccount == null) {
-      // User cancelled the sign-in process
-      return;
-    }
-    final GoogleSignInAuthentication googleSignInAuthentication =
-        await googleSignInAccount.authentication;
+    try{
+      
+      final GoogleSignInAccount? googleSignInAccount =
+          await GoogleSignIn().signIn();
+      if (googleSignInAccount == null) {
+        // User cancelled the sign-in process
+        return;
+      }
+      final GoogleSignInAuthentication googleSignInAuthentication =
+          await googleSignInAccount.authentication;
 
-    final AuthCredential credential = GoogleAuthProvider.credential(
-      accessToken: googleSignInAuthentication.accessToken,
-      idToken: googleSignInAuthentication.idToken,
-    );
+      final AuthCredential credential = GoogleAuthProvider.credential(
+        accessToken: googleSignInAuthentication.accessToken,
+        idToken: googleSignInAuthentication.idToken,
+      );
 
-    try {
       final UserCredential authResult =
           await FirebaseAuth.instance.signInWithCredential(credential);
       final User? user = authResult.user;
@@ -192,38 +193,11 @@ class AuthProvider extends APIService {
         print('Profile Picture URL: $userPhotoURL');
 
         return await loginGoogle(userEmail,accessToken);
-        // await Provider.of<AuthProvider>(context, listen: false)
-        //       .updateJWTToken(jwtToken: value['data']['data']['token'])
-        //       .then((_) {
-        //     Navigator.of(context).pushAndRemoveUntil(
-        //       MaterialPageRoute(
-        //         builder: (context) => Tabs(),
-        //       ),
-        //       (route) => false,
-        //     );
-        //   });
       }
     } catch (error) {
-      print(error);
+      print("Error while signing with google $error");
     }
-    /*
-    GoogleSignIn _googleSignIn = GoogleSignIn(
-      scopes: [
-        'email',
-        'https://www.googleapis.com/auth/contacts.readonly',
-      ],
-    );
-    try {
-      await _googleSignIn.signIn();
-      if (_googleSignIn == null) return;
-
-      final credintial =
-          GoogleAuthProvider.credential(accessToken: _googleSignIn.clientId);
-    } catch (error) {
-      print(error);
-    }
-
-     */
+   
   }
 
   signInWithApple({List<Scope> scopes = const []}) async {
@@ -266,8 +240,8 @@ class AuthProvider extends APIService {
         AppleIDAuthorizationScopes.fullName,
       ],
     );
-    print("Apple login Successfull, user ${credential?.givenName} with email ${credential?.email}. user token ${credential?.identityToken}");
-    return await loginApple(credential.givenName??"",credential.email??"",credential.identityToken!);
+    print("Apple login Successfull, user ${credential?.givenName} with email ${credential?.email}. user token ${credential?.authorizationCode}");
+    return await loginApple(credential.givenName??"",credential.email??"",credential.authorizationCode!);
   }
 
   Future<Map> forgetPassword({

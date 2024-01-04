@@ -3,23 +3,23 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>1049091943287-ft4ab95lud35c26e98bbq0kv1c5jbukh.apps.googleusercontent.com</string>
+	<string>171244151688-0268trc2gi928sf5jpbk3fjc9a3clb6q.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.1049091943287-ft4ab95lud35c26e98bbq0kv1c5jbukh</string>
+	<string>com.googleusercontent.apps.171244151688-0268trc2gi928sf5jpbk3fjc9a3clb6q</string>
 	<key>ANDROID_CLIENT_ID</key>
-	<string>1049091943287-h9sg7s55e35b9kod97th6nfubdlckf58.apps.googleusercontent.com</string>
+	<string>171244151688-09n7m7epg7dglmnfon4jg0a3j05i5df4.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
-	<string>AIzaSyB8buhDT11b0DudM29LpKAbpH9vB285EiE</string>
+	<string>AIzaSyDjhf1-2rEQxNIVQvBfRRF4tJoN7HeqfWM</string>
 	<key>GCM_SENDER_ID</key>
-	<string>1049091943287</string>
+	<string>171244151688</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>app.Eva.missaan</string>
+	<string>app.evastocks.missan</string>
 	<key>PROJECT_ID</key>
-	<string>eva-app-6c969</string>
+	<string>evastoks</string>
 	<key>STORAGE_BUCKET</key>
-	<string>eva-app-6c969.appspot.com</string>
+	<string>evastoks.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -31,6 +31,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:1049091943287:ios:ad4878cc8ea8ce9b140f72</string>
+	<string>1:171244151688:ios:38ccf788c5e7eb8f81903d</string>
 </dict>
 </plist>
