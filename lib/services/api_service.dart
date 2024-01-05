@@ -29,7 +29,7 @@ class APIService with ChangeNotifier, TokenManager {
               : '1',
       'deviceType': '2',
       'deviceToken': 'sunnanToken',
-      'x-app-version': '1.1'
+      'x-app-version': '1.1',
     };
 
     if (hasToken) {
