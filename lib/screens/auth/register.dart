@@ -331,7 +331,7 @@ class _RegisterState extends State<Register> {
                   const SizedBox(
                     height: 20,
                   ),
-                  if(Platform.isAndroid)
+                  // if(Platform.isAndroid)
                   InkWell(
                     onTap: () async {
                       await Provider.of<AuthProvider>(context, listen: false)
