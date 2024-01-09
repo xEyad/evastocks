@@ -92,8 +92,7 @@ class AuthProvider extends APIService {
             url: webBaseUrl + loginApi,body: {"Name":name,"Email":email,'token':accessToken,"device_token":fcmToken??"","device_type":deviceType})
         .then((value) async {
       if (value.statusCode! >= 200 &&
-          value.statusCode! <= 299 &&
-          value.data['success'].toString() == 'true') {
+          value.statusCode! <= 299 ) {
         return {
           'status': true,
           'data': value.data['data'],
@@ -433,7 +432,7 @@ class AuthProvider extends APIService {
               ? '2'
               : '1',
       'deviceType': '2',
-      'deviceToken': 'sunnanToken',
+      'deviceToken': '',
       'x-app-version': '1.1'
     };
     String endPoint =

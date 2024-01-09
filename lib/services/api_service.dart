@@ -28,7 +28,7 @@ class APIService with ChangeNotifier, TokenManager {
               ? '2'
               : '1',
       'deviceType': '2',
-      'deviceToken': 'sunnanToken',
+      'deviceToken': '',
       'x-app-version': '1.1',
     };
 
@@ -89,7 +89,7 @@ class APIService with ChangeNotifier, TokenManager {
               ? '2'
               : '1',
       'deviceType': '2',
-      'deviceToken': 'sunnanToken',
+      'deviceToken': '',
       'x-app-version': '1.1'
     };
     if (hasToken) {
@@ -141,7 +141,7 @@ class APIService with ChangeNotifier, TokenManager {
               ? '2'
               : '1',
       'deviceType': '2',
-      'deviceToken': 'sunnanToken',
+      'deviceToken': '',
       'x-app-version': '1.1'
     };
     if (hasToken) {
